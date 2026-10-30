@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Samskara Buddy 🌱 | Learn Values with Krish</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Subtle decorative cultural background elements -->
+  <div class="bg-decor decor-top-left" aria-hidden="true"></div>
+  <div class="bg-decor decor-top-right" aria-hidden="true"></div>
+  <div class="bg-decor decor-bottom" aria-hidden="true"></div>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="brand-pill">
+        <span class="brand-icon">🌱</span>
+        <h1 class="brand-title">SAMSKARA BUDDY</h1>
+      </div>
+      <p class="tagline">“Learn • Think • Act • Grow”</p>
+      <div class="header-badges">
+        <div class="age-badge">For Young Explorers (Ages 6–14)</div>
+        <div class="ai-badge" id="ai-status-badge">⚡ Gemini AI Brain Connected</div>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Krish Companion Hero Card -->
+      <section class="krish-hero-card" aria-label="Krish AI Companion">
+        <div class="krish-avatar-wrapper">
+          <div class="krish-avatar-frame">
+            <img 
+              src="assets/krish-portrait.jpg" 
+              alt="Official Krish AI Companion" 
+              class="krish-avatar-img" 
+              id="krish-avatar-img"
+            >
+          </div>
+          <div class="krish-badge">AI Friend Krish 🙏</div>
+        </div>
+
+        <!-- Krish's Interactive Speech Bubble -->
+        <div class="krish-bubble">
+          <p id="krish-greeting" class="bubble-text">
+            <strong>Namaste!</strong> I am <strong>Krish</strong>, your AI companion. Tell me a value you want to learn today, and let's explore its magic together! 🌟
+          </p>
+          <div class="bubble-indicator">
+            <span class="dot-pulse"></span>
+            <span id="krish-status-text">Krish is eager to share a story</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Input Section: Child Name -> Age -> Samskara -> Story Type -> Start Journey -->
+      <section class="input-card" aria-label="Samskara Journey Form">
+        <div class="input-card-header">
+          <h2 class="input-label">
+            ✨ Begin Your Samskara Journey with Krish
+          </h2>
+          <p class="input-subtext">Personalized values learning guided by timeless wisdom</p>
+        </div>
+
+        <form id="value-form" class="value-form" onsubmit="return false;">
+          <div class="form-grid">
+            <!-- 1. Child Name -->
+            <div class="form-field">
+              <label for="child-name-input" class="field-label">
+                <span class="field-icon">🧒</span> Child's Name
+              </label>
+              <input 
+                type="text" 
+                id="child-name-input" 
+                class="text-input" 
+                placeholder="e.g. Aarav, Ananya, Rohan..." 
+                autocomplete="name"
+              >
+            </div>
+
+            <!-- 2. Age -->
+            <div class="form-field">
+              <label for="child-age-select" class="field-label">
+                <span class="field-icon">🎂</span> Age (6–14)
+              </label>
+              <div class="select-wrapper">
+                <select id="child-age-select" class="select-input">
+                  <option value="6">6 years old</option>
+                  <option value="7">7 years old</option>
+                  <option value="8" selected>8 years old</option>
+                  <option value="9">9 years old</option>
+                  <option value="10">10 years old</option>
+                  <option value="11">11 years old</option>
+                  <option value="12">12 years old</option>
+                  <option value="13">13 years old</option>
+                  <option value="14">14 years old</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- 3. Samskara / Value -->
+            <div class="form-field form-field-full">
+              <label for="value-input" class="field-label">
+                <span class="field-icon">🌱</span> Samskara / Value
+              </label>
+              <input 
+                type="text" 
+                id="value-input" 
+                class="text-input" 
+                placeholder="e.g. Honesty, Respect, Kindness, Responsibility, Gratitude..." 
+                autocomplete="off"
+                required
+              >
+            </div>
+
+            <!-- 4. Story Type -->
+            <div class="form-field form-field-full">
+              <label for="story-type-select" class="field-label">
+                <span class="field-icon">📖</span> Story Type
+              </label>
+              <div class="select-wrapper">
+                <select id="story-type-select" class="select-input">
+                  <option value="Everyday School & Friends" selected>🎒 Everyday School & Friends</option>
+                  <option value="Panchatantra / Animal Fable">🐘 Panchatantra / Animal Fables</option>
+                  <option value="Family & Home Life">🏡 Family & Home Life</option>
+                  <option value="Indian History & Mythology">🏹 Indian History & Mythology</option>
+                  <option value="Nature & Wonder">🌿 Nature & Wonder</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. Submit Button: Start My Samskara Journey -->
+          <div class="form-submit-wrap">
+            <button type="submit" id="ask-btn" class="ask-button start-journey-btn">
+              <span>Start My Samskara Journey 🌱</span>
+              <span class="btn-icon">✨</span>
+            </button>
+          </div>
+        </form>
+
+        <!-- Fallback/Info notice (hidden by default) -->
+        <div id="api-notice-banner" class="api-notice-banner hidden" role="alert"></div>
+
+        <!-- Quick Selection Chips for Children -->
+        <div class="quick-chips-container">
+          <span class="quick-chips-label">Or pick one of these popular Samskaras:</span>
+          <div class="chips-list">
+            <button type="button" class="chip" data-value="Honesty">
+              <span class="chip-icon">🌟</span>
+              <span class="chip-text">Honesty</span>
+            </button>
+            <button type="button" class="chip" data-value="Respect">
+              <span class="chip-icon">🙏</span>
+              <span class="chip-text">Respect</span>
+            </button>
+            <button type="button" class="chip" data-value="Kindness">
+              <span class="chip-icon">💛</span>
+              <span class="chip-text">Kindness</span>
+            </button>
+            <button type="button" class="chip" data-value="Gratitude">
+              <span class="chip-icon">🌸</span>
+              <span class="chip-text">Gratitude</span>
+            </button>
+            <button type="button" class="chip" data-value="Responsibility">
+              <span class="chip-icon">🛡️</span>
+              <span class="chip-text">Responsibility</span>
+            </button>
+            <button type="button" class="chip" data-value="Discipline">
+              <span class="chip-icon">⏰</span>
+              <span class="chip-text">Discipline</span>
+            </button>
+            <button type="button" class="chip" data-value="Empathy">
+              <span class="chip-icon">❤️</span>
+              <span class="chip-text">Empathy</span>
+            </button>
+            <button type="button" class="chip" data-value="Courage">
+              <span class="chip-icon">🦁</span>
+              <span class="chip-text">Courage</span>
+            </button>
+            <button type="button" class="chip" data-value="Patience">
+              <span class="chip-icon">⏳</span>
+              <span class="chip-text">Patience</span>
+            </button>
+            <button type="button" class="chip" data-value="Self-Control">
+              <span class="chip-icon">🛑</span>
+              <span class="chip-text">Self-Control</span>
+            </button>
+            <button type="button" class="chip" data-value="Sharing">
+              <span class="chip-icon">🎁</span>
+              <span class="chip-text">Sharing</span>
+            </button>
+            <button type="button" class="chip" data-value="Helping Others">
+              <span class="chip-icon">🌱</span>
+              <span class="chip-text">Helping Others</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Response Section: 5-Part Krish Format -->
+      <section id="response-container" class="response-container hidden" aria-live="polite">
+        <!-- Value Header Banner -->
+        <div class="response-header">
+          <div class="value-title-wrap">
+            <span class="value-sanskrit-tag" id="value-sanskrit">Samskara</span>
+            <h2 id="current-value-title" class="current-value-title">Kindness</h2>
+          </div>
+          <div class="response-actions">
+            <button id="listen-btn" class="action-btn" title="Listen to Krish" aria-label="Listen to Krish read aloud">
+              <span class="action-icon">🔊</span>
+              <span class="action-label">Listen to All</span>
+            </button>
+            <button id="reset-btn" class="action-btn secondary" title="Explore another value">
+              <span class="action-icon">🔄</span>
+              <span class="action-label">Explore Another</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- The 5 Required Formats -->
+        <div class="cards-grid">
+          <!-- 1. Understand the Value -->
+          <article class="format-card card-understand" id="card-understand">
+            <div class="card-header">
+              <span class="card-badge">1</span>
+              <img src="assets/krish-idea.jpg" alt="Krish Idea" class="krish-card-avatar">
+              <div class="card-title-group">
+                <span class="card-icon">💡</span>
+                <h3 class="card-title">Understand the Value</h3>
+              </div>
+              <button type="button" class="card-listen-btn" data-section="understand" title="Listen to Meaning" aria-label="Listen to Meaning">
+                <span class="card-listen-icon">🔊</span>
+                <span class="card-listen-label">Listen</span>
+              </button>
+            </div>
+            <div class="card-body">
+              <p id="content-understand" class="card-text"></p>
+            </div>
+          </article>
+
+          <!-- 2. Story Time -->
+          <article class="format-card card-story" id="card-story">
+            <div class="card-header">
+              <span class="card-badge">2</span>
+              <img src="assets/krish-reading.jpg" alt="Krish Reading" class="krish-card-avatar">
+              <div class="card-title-group">
+                <span class="card-icon">📖</span>
+                <h3 class="card-title">Story Time</h3>
+              </div>
+              <button type="button" class="card-listen-btn" data-section="story" title="Listen to Story" aria-label="Listen to Story">
+                <span class="card-listen-icon">🔊</span>
+                <span class="card-listen-label">Listen to Story</span>
+              </button>
+            </div>
+            <div class="card-body">
+              <h4 id="content-story-title" class="story-headline"></h4>
+              <p id="content-story" class="card-text story-text"></p>
+              
+              <!-- Story Illustrations Gallery (Beginning, Middle, Ending) -->
+              <div id="story-illustrations" class="story-illustrations"></div>
+
+              <div class="moral-box">
+                <span class="moral-label">🌱 Krish's Wisdom:</span>
+                <span id="content-moral" class="moral-text"></span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 3. Think Time -->
+          <article class="format-card card-think" id="card-think">
+            <div class="card-header">
+              <span class="card-badge">3</span>
+              <img src="assets/krish-think.jpg" alt="Krish Thinking" class="krish-card-avatar">
+              <div class="card-title-group">
+                <span class="card-icon">💭</span>
+                <h3 class="card-title">Think Time</h3>
+              </div>
+              <button type="button" class="card-listen-btn" data-section="think" title="Listen to Reflection" aria-label="Listen to Reflection">
+                <span class="card-listen-icon">🔊</span>
+                <span class="card-listen-label">Listen</span>
+              </button>
+            </div>
+            <div class="card-body">
+              <p class="think-intro">Pause and reflect with Krish:</p>
+              <ul id="content-think-list" class="think-questions-list"></ul>
+            </div>
+          </article>
+
+          <!-- 4. What Would You Do? -->
+          <article class="format-card card-scenario" id="card-scenario">
+            <div class="card-header">
+              <span class="card-badge">4</span>
+              <img src="assets/krish-wave.jpg" alt="Krish Guiding" class="krish-card-avatar">
+              <div class="card-title-group">
+                <span class="card-icon">🤔</span>
+                <h3 class="card-title">What Would You Do?</h3>
+              </div>
+              <button type="button" class="card-listen-btn" data-section="scenario" title="Listen to Scenario" aria-label="Listen to Scenario">
+                <span class="card-listen-icon">🔊</span>
+                <span class="card-listen-label">Listen</span>
+              </button>
+            </div>
+            <div class="card-body">
+              <div class="scenario-box">
+                <span class="scenario-tag">Real-Life Situation:</span>
+                <p id="content-scenario" class="scenario-text"></p>
+              </div>
+              <div id="scenario-options" class="scenario-options"></div>
+              <div id="scenario-feedback" class="scenario-feedback hidden"></div>
+            </div>
+          </article>
+
+          <!-- 5. Krish's Daily Challenge -->
+          <article class="format-card card-challenge" id="card-challenge">
+            <div class="card-header">
+              <span class="card-badge">5</span>
+              <img src="assets/krish-happy.jpg" alt="Krish Cheering" class="krish-card-avatar">
+              <div class="card-title-group">
+                <span class="card-icon">🎯</span>
+                <h3 class="card-title">Krish's Daily Challenge</h3>
+              </div>
+              <button type="button" class="card-listen-btn" data-section="challenge" title="Listen to Challenge" aria-label="Listen to Challenge">
+                <span class="card-listen-icon">🔊</span>
+                <span class="card-listen-label">Listen</span>
+              </button>
+            </div>
+            <div class="card-body">
+              <div class="challenge-highlight">
+                <p id="content-challenge" class="challenge-text"></p>
+              </div>
+              <div class="challenge-action-area">
+                <button id="complete-challenge-btn" class="challenge-btn">
+                  <span>I Accept This Challenge! 🌟</span>
+                </button>
+                <p id="challenge-status" class="challenge-done-msg hidden">
+                  🎉 Fantastic! You took a step toward becoming a Samskara Hero today!
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p class="footer-text">
+        🌱 <strong>Samskara Buddy</strong> — Guided with care by <strong>Krish</strong>. Helping young minds build character, compassion, and wisdom.
+      </p>
+    </footer>
+  </div>
+
+  <!-- Configuration (gitignored for safety) -->
+  <script src="config.js" onerror="/* config.js optional */"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+# Samskara Buddy Web Service Dependencies
+# The backend is built with Python standard library (http.server, urllib, json, threading)
+# edge-tts is optional for Microsoft Neural Indian English voice synthesis
+edge-tts>=6.1.0
